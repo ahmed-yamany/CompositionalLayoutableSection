@@ -18,14 +18,15 @@ https://github.com/ahmed-yamany/CompositionalLayoutableSection.git
 
 
 ## ViewController
-<img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/1.png" width="650" height="600">
+![](https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/1.png)
 
 ## CompositionalLayoutableSection
-<img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/2.png" width="650" height="450">
-<img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/3.png" width="650" height="450">
-<img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/4.png" width="650" height="450">
-<img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/5.png" width="650" height="350">
+![](https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/2.png)
+![](https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/3.png)
+![](https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/4.png)
+![](https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/5.png)
 
 ## sections delegate and datasource
-<img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/6.png" width="650" height="450">
-<img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/7.png" width="650" height="300">
+![](https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/6.png)
+![](https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/7.png)
+
