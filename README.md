@@ -26,3 +26,6 @@ https://github.com/ahmed-yamany/CompositionalLayoutableSection.git
 <img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/4.png" width="650" height="450">
 <img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/5.png" width="650" height="350">
 
+## sections delegate and datasource
+<img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/6.png" width="650" height="450">
+<img src="https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/7.png" width="650" height="300">
