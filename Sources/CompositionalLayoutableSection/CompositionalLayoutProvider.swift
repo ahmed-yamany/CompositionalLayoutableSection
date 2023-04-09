@@ -9,7 +9,7 @@ import UIKit
 
 /// Protocol that defines the requirements for providing data for a compositional layout in a collection view
 @available(iOS 13.0, *)
-protocol CompositionalLayoutProvider {
+public protocol CompositionalLayoutProvider {
     
     /// An array of compositional layout sections to be used in the collection view's layout
     var compositionalLayoutSections: [CompositionalLayoutableSection] { get set }
@@ -21,7 +21,7 @@ protocol CompositionalLayoutProvider {
 }
 
 @available(iOS 13.0, *)
-extension CompositionalLayoutProvider {
+public extension CompositionalLayoutProvider {
     
     /// Registers cells for all sections in the collection view
     func registerCells(for collectionView: UICollectionView) {

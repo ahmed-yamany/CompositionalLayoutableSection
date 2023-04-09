@@ -9,7 +9,7 @@ import UIKit
 
 
 @available(iOS 13.0, *)
-class CompositionalLayoutDelegate: NSObject, UICollectionViewDelegate {
+open class CompositionalLayoutDelegate: NSObject, UICollectionViewDelegate {
     var profider: any CompositionalLayoutProvider
     
     init(_ profider: any CompositionalLayoutProvider) {

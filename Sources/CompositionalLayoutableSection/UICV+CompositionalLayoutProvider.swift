@@ -8,7 +8,7 @@
 import UIKit
 
 @available(iOS 13.0, *)
-extension UICollectionView {
+public extension UICollectionView {
     func updatecollectionViewCompositionalLayout(with provider: any CompositionalLayoutProvider) {
         provider.registerCells(for: self)
         provider.registerSupplementaryViews(for: self)

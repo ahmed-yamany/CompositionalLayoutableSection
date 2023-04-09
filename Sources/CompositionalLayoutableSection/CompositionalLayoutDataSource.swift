@@ -9,7 +9,7 @@ import UIKit
 
 
 @available(iOS 13.0, *)
-class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
+open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
     
     var profider: any CompositionalLayoutProvider
     
