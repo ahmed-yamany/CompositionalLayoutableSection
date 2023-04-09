@@ -1,6 +1,6 @@
 # CompositionalLayoutableSection
 
-The way I follow to easily implement Collection View Compositional Layout
+The way I follow to easily implement Collection View Compositional Layout without doing alot of swift cases
 
 ![myfile](https://github.com/ahmed-yamany/CompositionalLayoutableSection/blob/main/assets/video.gif)
 
