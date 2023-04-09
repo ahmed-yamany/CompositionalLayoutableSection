@@ -35,7 +35,7 @@ public protocol CompositionalLayoutableSectionLayout {
     
 }
 
-public @objc protocol CompositionalLayoutableSectionDelegate: UICollectionViewDelegate {
+@objc public protocol CompositionalLayoutableSectionDelegate: UICollectionViewDelegate {
     /// Registers the cell type to be used for the items in the section.
     @objc func registerCell(_ collectionView: UICollectionView)
     
@@ -60,9 +60,9 @@ public @objc protocol CompositionalLayoutableSectionDelegate: UICollectionViewDe
 @available(iOS 13.0, *)
 open class CompositionalLayoutableSection: NSObject {
     
-    var dataSource: (any CompositionalLayoutableSectionDataSource)? = nil
-    var layout: (any CompositionalLayoutableSectionLayout)? = nil
-    var delegate: (any CompositionalLayoutableSectionDelegate)? = nil
+    public var dataSource: (any CompositionalLayoutableSectionDataSource)? = nil
+    public var layout: (any CompositionalLayoutableSectionLayout)? = nil
+    public var delegate: (any CompositionalLayoutableSectionDelegate)? = nil
     
 }
 

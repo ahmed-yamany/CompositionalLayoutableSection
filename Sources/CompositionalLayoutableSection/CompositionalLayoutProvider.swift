@@ -21,25 +21,25 @@ public protocol CompositionalLayoutProvider {
 }
 
 @available(iOS 13.0, *)
-public extension CompositionalLayoutProvider {
+extension CompositionalLayoutProvider {
     
     /// Registers cells for all sections in the collection view
-    func registerCells(for collectionView: UICollectionView) {
+    public func registerCells(for collectionView: UICollectionView) {
         compositionalLayoutSections.forEach { $0.delegate?.registerCell(collectionView) }
     }
     
     /// Registers supplementary views for all sections in the collection view
-    func registerSupplementaryViews(for collectionView: UICollectionView) {
+    public func registerSupplementaryViews(for collectionView: UICollectionView) {
         compositionalLayoutSections.forEach { $0.delegate?.registerSupplementaryView?(collectionView) }
     }
     
     /// Retrieves the section at the given index path
-    func getSection(at indexPath: IndexPath) -> CompositionalLayoutableSection {
+    public func getSection(at indexPath: IndexPath) -> CompositionalLayoutableSection {
         return self.compositionalLayoutSections[indexPath.section]
     }
     
     /// Constructs and returns a UICollectionViewCompositionalLayout instance based on the compositional layout sections
-    func collectionViewCompositionalLayout() -> UICollectionViewCompositionalLayout {
+    public func collectionViewCompositionalLayout() -> UICollectionViewCompositionalLayout {
         
       let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
           
