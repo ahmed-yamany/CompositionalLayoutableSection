@@ -10,7 +10,7 @@ import UIKit
 
 @available(iOS 13.0, *)
 open class CompositionalLayoutDelegate: NSObject, UICollectionViewDelegate {
-    public var profider: any CompositionalLayoutProvider
+    open var profider: any CompositionalLayoutProvider
     
     public init(_ profider: any CompositionalLayoutProvider) {
         self.profider = profider

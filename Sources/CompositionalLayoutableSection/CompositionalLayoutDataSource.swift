@@ -11,9 +11,9 @@ import UIKit
 @available(iOS 13.0, *)
 open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
     
-    public var profider: any CompositionalLayoutProvider
+    open var profider: any CompositionalLayoutProvider
     
-    init(_ profider: any CompositionalLayoutProvider) {
+    public init(_ profider: any CompositionalLayoutProvider) {
         self.profider = profider
     }
     

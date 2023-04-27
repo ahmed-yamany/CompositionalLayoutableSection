@@ -60,9 +60,9 @@ public protocol CompositionalLayoutableSectionLayout {
 @available(iOS 13.0, *)
 open class CompositionalLayoutableSection: NSObject {
     
-    public var dataSource: (any CompositionalLayoutableSectionDataSource)? = nil
-    public var layout: (any CompositionalLayoutableSectionLayout)? = nil
-    public var delegate: (any CompositionalLayoutableSectionDelegate)? = nil
+    open var dataSource: (any CompositionalLayoutableSectionDataSource)? = nil
+    open var layout: (any CompositionalLayoutableSectionLayout)? = nil
+    open var delegate: (any CompositionalLayoutableSectionDelegate)? = nil
     
 }
 
