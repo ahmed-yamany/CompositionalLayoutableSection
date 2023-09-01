@@ -29,6 +29,26 @@ public protocol CompositionalLayoutableSectionLayout {
     /// Returns the layout for the section.
     func sectionLayout(at index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection
 }
+@available(iOS 13.0, *)
+extension CompositionalLayoutableSectionLayout {
+    /**
+     Updates the pagination reusable view based on the current scroll offset and layout environment.
+
+     - Parameters:
+        - items: An array of `NSCollectionLayoutVisibleItem` representing the visible items in the collection view.
+        - offset: The current content offset of the collection view.
+        - layoutEnvironment: The `NSCollectionLayoutEnvironment` in which the collection view is being displayed.
+     */
+    public func currentPageDidChanged(withItems: [any NSCollectionLayoutVisibleItem],
+                                      offset: CGPoint,
+                                      layoutEnvironment: NSCollectionLayoutEnvironment, completion: (Int) -> Void) {
+        let availableLayoutWidth = layoutEnvironment.container.effectiveContentSize.width
+        // Calculate the current page based on the horizontal scroll offset and screen width
+        let page = round(offset.x / availableLayoutWidth)
+        // Call the method to update the pagination reusable view's selected page
+        completion(Int(page))
+    }
+}
 
 @objc public protocol CompositionalLayoutableSectionDelegate: UICollectionViewDelegate {
     /// Registers the cell type to be used for the items in the section.
