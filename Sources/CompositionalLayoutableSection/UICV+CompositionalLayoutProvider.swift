@@ -23,7 +23,20 @@ extension UICollectionView {
      ensure that the sections for the compositional layout have been appended to the `compositionalLayoutSections`
      property of the `CompositionalLayoutProvider`.
      Calling this method before configuring the sections may lead to unexpected behavior.
-
+     
+     Example usage:
+        ```swift
+        // Appdate collection View Delegate
+        compositionalLayoutDelegate.updateProvider(with: self)
+        compositionalLayoutDataSource.updateProvider(with: self)
+        collectionView.delegate = compositionalLayoutDelegate
+        collectionView.dataSource = compositionalLayoutDataSource
+        // Append sections compositionalLayoutSections...
+        let section = SplashCollectionViewSection()
+        compositionalLayoutSections.append(section)
+        section.update(collectionView, withItems: [])
+        // Then call this method
+        collectionView.updateCollectionViewCompositionalLayout(with: layoutProvider)
      */
     public func updatecollectionViewCompositionalLayout(with provider: any CompositionalLayoutProvider) {
         // Register cells and supplementary views defined by the provider

@@ -12,8 +12,12 @@ public protocol CompositionalLayoutableSectionDataSource: UICollectionViewDataSo
     associatedtype ResposeType
     /// An array of items for the section.
     var items: [ResposeType] { get set }
+}
+extension CompositionalLayoutableSectionDataSource {
     /// updates items and should reloads collection view data
-    func update(_ collectionView: UICollectionView, withItems items: [ResposeType])
+    public func update(_ collectionView: UICollectionView, withItems items: [ResposeType]) {
+        self.items = items
+    }
 }
 
 @available(iOS 13.0, *)
