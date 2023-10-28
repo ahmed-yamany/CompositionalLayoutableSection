@@ -44,5 +44,6 @@ extension UICollectionView {
         provider.registerSupplementaryViews(for: self)
         // Apply the compositional layout from the provider to the collection view
         collectionViewLayout = provider.collectionViewCompositionalLayout
+        reloadData()
     }
 }

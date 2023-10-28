@@ -9,13 +9,13 @@ import UIKit
 
 public protocol CompositionalLayoutableSectionDataSource: UICollectionViewDataSource {
     /// A generic type representing the data type for the items in the section.
-    associatedtype ResposeType
+    associatedtype ItemsType
     /// An array of items for the section.
-    var items: [ResposeType] { get set }
+    var items: [ItemsType] { get set }
 }
-extension CompositionalLayoutableSectionDataSource {
+public extension CompositionalLayoutableSectionDataSource {
     /// updates items and should reloads collection view data
-    public func update(_ collectionView: UICollectionView, withItems items: [ResposeType]) {
+    func update(_ collectionView: UICollectionView, withItems items: [ItemsType]) {
         self.items = items
     }
 }
@@ -55,6 +55,8 @@ extension CompositionalLayoutableSectionLayout {
     @objc func registerCell(_ collectionView: UICollectionView)
     /// Registers the supplementary view type to be used in the section.
     @objc optional func registerSupplementaryView(_ collectionView: UICollectionView)
+    @available(iOS 13.0, *)
+    @objc optional func registerDecorationView(_ layout: UICollectionViewCompositionalLayout)
 }
 
 /*
@@ -67,11 +69,10 @@ extension CompositionalLayoutableSectionLayout {
  - You can create multiple objects Inherets from this class
    and switch between them to show different sections in the same collection view,
  */
-// swiftlint:disable all
+
 @available(iOS 13.0, *)
 open class CompositionalLayoutableSection: NSObject {
-    open var dataSource: (any CompositionalLayoutableSectionDataSource)? = nil
-    open var layout: (any CompositionalLayoutableSectionLayout)? = nil
-    open var delegate: (any CompositionalLayoutableSectionDelegate)? = nil
+    open var dataSource: (any CompositionalLayoutableSectionDataSource)?
+    open var layout: (any CompositionalLayoutableSectionLayout)?
+    open var delegate: (any CompositionalLayoutableSectionDelegate)?
 }
-// swiftlint:enable all
