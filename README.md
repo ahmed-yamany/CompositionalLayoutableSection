@@ -15,7 +15,7 @@ It allows for better code organization and reusability, making it easier to main
 - Usage
 
 ## Introduction
-UICollectionViews with compositional layouts offer a flexible and powerful way to create complex grid-based interfaces. CompositionalLayoutableSection provides a convenient framework to work with compositional layouts in a more structured manner.
+UICollectionViews with compositional layouts offer a flexible and powerful way to create complex UI interfaces. CompositionalLayoutableSection provides a convenient framework to work with compositional layouts in a more structured manner.
 
 ## Protocols
 CompositionalLayoutableSection introduces three protocols:
