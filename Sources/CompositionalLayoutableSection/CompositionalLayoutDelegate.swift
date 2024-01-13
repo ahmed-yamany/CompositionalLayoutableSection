@@ -89,7 +89,8 @@ open class CompositionalLayoutDelegate: NSObject, UICollectionViewDelegate {
     ///
     @available(iOS 16.0, *)
     public func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
-        let section = self.provider.getCompositionalLayoutableSection(at: indexPaths.first!)
+        guard let sectionIndex = indexPaths.first else { return nil }
+        let section = self.provider.getCompositionalLayoutableSection(at: sectionIndex)
         return section.delegate?.collectionView?(collectionView, contextMenuConfigurationForItemsAt: indexPaths, point: point)
     }
     ///
