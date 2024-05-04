@@ -7,42 +7,51 @@
 
 import UIKit
 
-/// Protocol that defines the requirements for providing data for a compositional layout in a collection view
 @available(iOS 13.0, *)
-public protocol CompositionalLayoutProvider {
-    /// An array of compositional layout sections to be used in the collection view's layout
+public protocol CompositionalLayoutProvider: AnyObject {
     var compositionalLayoutSections: [CompositionalLayoutableSection] { get set }
 }
 
 @available(iOS 13.0, *)
 extension CompositionalLayoutProvider {
-    /// Registers cells for all sections in the collection view
     public func registerCells(for collectionView: UICollectionView) {
-        compositionalLayoutSections.forEach { $0.delegate?.registerCell(collectionView) }
+        compositionalLayoutSections.forEach { $0.delegate?.registerCell(in: collectionView) }
     }
-    /// Registers supplementary views for all sections in the collection view
+
     public func registerSupplementaryViews(for collectionView: UICollectionView) {
-        compositionalLayoutSections.forEach { $0.delegate?.registerSupplementaryView?(collectionView) }
+        compositionalLayoutSections.forEach { $0.delegate?.registerSupplementaryView?(in: collectionView) }
     }
-    /// Registers Decoration Views for all section in the collection View
+
     private func registerDecorationViews(for layout: UICollectionViewCompositionalLayout) {
-        compositionalLayoutSections.forEach { $0.delegate?.registerDecorationView?(layout)}
+        compositionalLayoutSections.forEach { $0.delegate?.registerDecorationView?(in: layout) }
     }
-    /// Retrieves the section at the given index path
-    public func getCompositionalLayoutableSection(at indexPath: IndexPath) -> CompositionalLayoutableSection {
-        return self.compositionalLayoutSections[indexPath.section]
+
+    public func getCompositionalLayoutableSection(at indexPath: IndexPath) -> CompositionalLayoutableSection? {
+        return compositionalLayoutSections[indexPath.section]
     }
-    /// Constructs and returns a UICollectionViewCompositionalLayout instance based on the compositional layout sections
+    
+    public func dataSource(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionDataSource)? {
+        getCompositionalLayoutableSection(at: indexPath)?.dataSource
+    }
+    
+    public func delegate(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionDelegate)? {
+        getCompositionalLayoutableSection(at: indexPath)?.delegate
+    }
+    
+    public func layout(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionLayout)? {
+        getCompositionalLayoutableSection(at: indexPath)?.sectionLayout
+    }
+    
     public var collectionViewCompositionalLayout: UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            let sectionLayout = self.getCompositionalLayoutableSection(at: IndexPath(row: 0, section: sectionIndex))
-                .layout?
-                .sectionLayout(at: sectionIndex, layoutEnvironment: layoutEnvironment)
-            return sectionLayout
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
+            guard let self = self else { return nil }
+            let indexPath = IndexPath(row: 0, section: sectionIndex)
+            let section = self.layout(at: indexPath)?.sectionLayout(at: sectionIndex, layoutEnvironment: layoutEnvironment)
+            return section
         }
-        //
-        self.registerDecorationViews(for: layout)
-        //
+        
+        registerDecorationViews(for: layout)
+        
         return layout
     }
 }

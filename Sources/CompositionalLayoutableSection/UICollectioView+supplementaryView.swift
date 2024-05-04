@@ -20,15 +20,15 @@ public extension UICollectionView {
        - class: The class type of the supplementary view to register. This class must conform to `IdentifiableView`.
        - kind: The kind of supplementary view to associate with the class.
      */
-    func register<T: UICollectionReusableView>(_ class: T.Type,
-                                               supplementaryViewOfKind kind: String) where T: IdentifiableView {
+    func register<T: UICollectionReusableView>(_ class: T.Type, supplementaryViewOfKind kind: String) where T: IdentifiableView {
         register(T.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: T.identifier)
     }
+    
     /// Register a UICollectionReusableView class from nib file with the collection view and associate it with a reuse identifier
-    func registerFromNib<T: UICollectionReusableView>(_ class: T.Type,
-                                                      supplementaryViewOfKind kind: String) where T: IdentifiableView {
+    func registerFromNib<T: UICollectionReusableView>(_ class: T.Type, supplementaryViewOfKind kind: String) where T: IdentifiableView {
         register(UINib(nibName: T.identifier, bundle: .main), forSupplementaryViewOfKind: kind, withReuseIdentifier: T.identifier)
     }
+    
     /**
     Dequeues a reusable supplementary view of the specified class for a given kind and index path.
     
@@ -51,8 +51,7 @@ public extension UICollectionView {
         guard let view = dequeueReusableSupplementaryView(ofKind: kind,
                                                           withReuseIdentifier: T.identifier,
                                                           for: indexPath) as? T else {
-            fatalError(
-            "Couldn't find UICollectionReusableView for \(T.identifier), make sure the view is registered with collection view")
+            fatalError("Couldn't find UICollectionReusableView for \(T.identifier), make sure the view is registered with collection view")
         }
         return view
     }
