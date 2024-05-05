@@ -37,10 +37,20 @@ open class CompositionalLayoutableSection: NSObject {
     open weak var dataSource: (any CompositionalLayoutableSectionDataSource)?
     open weak var sectionLayout: (any CompositionalLayoutableSectionLayout)?
     open weak var delegate: (any CompositionalLayoutableSectionDelegate)?
-    public weak var collectionView: UICollectionView!
-    public var index: Int!
+    public weak var collectionView: UICollectionView?
+    public var index: Int?
     
     public func reloadData() {
+        guard let collectionView else {
+            debugPrint("couldn't reload data because collectionView is nil")
+            return
+        }
+        
+        guard let index else {
+            debugPrint("couldn't reload data because index is nil")
+            return
+        }
+        
         collectionView.reloadSections(IndexSet(integer: index))
     }
 }
