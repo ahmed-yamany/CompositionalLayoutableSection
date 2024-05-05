@@ -39,4 +39,8 @@ open class CompositionalLayoutableSection: NSObject {
     open weak var delegate: (any CompositionalLayoutableSectionDelegate)?
     public weak var collectionView: UICollectionView!
     public var index: Int!
+    
+    func reloadData() {
+        collectionView.reloadSections(IndexSet(integer: index))
+    }
 }
