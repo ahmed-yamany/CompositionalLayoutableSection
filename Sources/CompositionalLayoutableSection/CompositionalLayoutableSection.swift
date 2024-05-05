@@ -37,4 +37,6 @@ open class CompositionalLayoutableSection: NSObject {
     open weak var dataSource: (any CompositionalLayoutableSectionDataSource)?
     open weak var sectionLayout: (any CompositionalLayoutableSectionLayout)?
     open weak var delegate: (any CompositionalLayoutableSectionDelegate)?
+    public weak var collectionView: UICollectionView!
+    public var index: Int!
 }
