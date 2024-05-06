@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol CompositionalLayoutableSectionDataSource: UICollectionViewDataSource {
+public protocol CompositionalLayoutableSectionDataSource: UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     associatedtype ItemsType
 
     var items: [ItemsType] { get set }

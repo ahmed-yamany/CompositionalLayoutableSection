@@ -19,6 +19,10 @@ open class CompositionalLayoutDelegate: NSObject, UICollectionViewDelegate {
         provider?.delegate(at: indexPath)
     }
     
+    private func delegates() -> [CompositionalLayoutableSectionDelegate?] {
+        provider?.compositionalLayoutSections.map { $0.delegate } ?? []
+    }
+    
     public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         delegate(at: indexPath)?.collectionView?(collectionView, shouldHighlightItemAt: indexPath) ?? true
     }
@@ -90,5 +94,55 @@ open class CompositionalLayoutDelegate: NSObject, UICollectionViewDelegate {
     @available(iOS 16.0, *)
     public func collectionView(_ collectionView: UICollectionView, contextMenuConfiguration configuration: UIContextMenuConfiguration, highlightPreviewForItemAt indexPath: IndexPath) -> UITargetedPreview? {
         delegate(at: indexPath)?.collectionView?(collectionView, contextMenuConfiguration: configuration, highlightPreviewForItemAt: indexPath)
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegates().forEach { $0?.scrollViewDidScroll?(scrollView) }
+    }
+
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        delegates().forEach { $0?.scrollViewDidZoom?(scrollView) }
+    }
+
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegates().forEach { $0?.scrollViewWillBeginDragging?(scrollView) }
+    }
+
+    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        delegates().forEach { $0?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset) }
+    }
+
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        delegates().forEach { $0?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate) }
+
+    }
+
+    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        delegates().forEach { $0?.scrollViewWillBeginDecelerating?(scrollView) }
+    }
+
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        delegates().forEach { $0?.scrollViewDidEndDecelerating?(scrollView) }
+    }
+
+    
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        delegates().forEach { $0?.scrollViewDidEndScrollingAnimation?(scrollView) }
+    }
+    
+    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        delegates().forEach { $0?.scrollViewWillBeginZooming?(scrollView, with: view) }
+    }
+
+    public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        delegates().forEach { $0?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale) }
+    }
+    
+    public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        delegates().forEach { $0?.scrollViewDidScrollToTop?(scrollView) }
+    }
+     
+    public func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
+        delegates().forEach { $0?.scrollViewDidChangeAdjustedContentInset?(scrollView) }
     }
 }

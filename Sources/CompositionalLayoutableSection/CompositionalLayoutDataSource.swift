@@ -7,7 +7,8 @@
 
 import UIKit
 @available(iOS 13.0, *)
-open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
+open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+    
     public weak var provider: (any CompositionalLayoutProvider)?
 
     public init(provider: any CompositionalLayoutProvider) {
@@ -40,5 +41,13 @@ open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         dataSource(at: sourceIndexPath)?.collectionView?(collectionView, moveItemAt: sourceIndexPath, to: destinationIndexPath)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        dataSource(at: indexPaths[0])?.collectionView(collectionView, prefetchItemsAt: indexPaths)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        dataSource(at: indexPaths[0])?.collectionView?(collectionView, cancelPrefetchingForItemsAt: indexPaths)
     }
 }
