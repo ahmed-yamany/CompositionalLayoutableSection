@@ -44,10 +44,26 @@ open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource, 
     }
     
     public func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        dataSource(at: indexPaths[0])?.collectionView(collectionView, prefetchItemsAt: indexPaths)
+        guard let firstIndex = indexPaths[safe: 0] else {
+            return
+        }
+        dataSource(at: firstIndex)?.collectionView(collectionView, prefetchItemsAt: indexPaths)
     }
     
     public func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        dataSource(at: indexPaths[0])?.collectionView?(collectionView, cancelPrefetchingForItemsAt: indexPaths)
+        guard let firstIndex = indexPaths[safe: 0] else {
+            return
+        }
+        dataSource(at: firstIndex)?.collectionView?(collectionView, cancelPrefetchingForItemsAt: indexPaths)
+    }
+}
+
+extension Collection {
+    /// Safely retrieves an element at the specified index, if it exists.
+    ///
+    /// - Parameter index: The index of the element to retrieve.
+    /// - Returns: The element at the specified index, or `nil` if the index is out of bounds.
+    subscript(safe index: Index) -> Element? {
+        indices.contains(index) ? self[index] : nil
     }
 }
