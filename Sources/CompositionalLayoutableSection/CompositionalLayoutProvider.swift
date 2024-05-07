@@ -53,6 +53,10 @@ extension CompositionalLayoutProvider {
         getCompositionalLayoutableSection(at: indexPath)?.dataSource
     }
     
+    public func prefetchDataSource(at indexPath: IndexPath) -> (any UICollectionViewDataSourcePrefetching)? {
+        getCompositionalLayoutableSection(at: indexPath)?.prefetchDataSource
+    }
+    
     public func delegate(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionDelegate)? {
         getCompositionalLayoutableSection(at: indexPath)?.delegate
     }

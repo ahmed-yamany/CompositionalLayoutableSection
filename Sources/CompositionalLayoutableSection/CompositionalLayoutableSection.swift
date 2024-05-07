@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol CompositionalLayoutableSectionDataSource: UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+public protocol CompositionalLayoutableSectionDataSource: UICollectionViewDataSource {
     associatedtype ItemsType
 
     var items: [ItemsType] { get set }
@@ -24,7 +24,7 @@ public protocol CompositionalLayoutableSectionLayout: AnyObject {
 }
 
 /*
- - This class defines a three optional properties that hold objects
+ - This class defines a four optional properties that hold objects
    conforming to the three protocols a section in the compositional layout should implement
 
  - Using this can lead to better organization and abstraction of your code,
@@ -35,8 +35,10 @@ public protocol CompositionalLayoutableSectionLayout: AnyObject {
  */
 open class CompositionalLayoutableSection: NSObject {
     open weak var dataSource: (any CompositionalLayoutableSectionDataSource)?
+    open weak var prefetchDataSource: (any UICollectionViewDataSourcePrefetching)?
     open weak var sectionLayout: (any CompositionalLayoutableSectionLayout)?
     open weak var delegate: (any CompositionalLayoutableSectionDelegate)?
+    
     public weak var collectionView: UICollectionView?
     public var index: Int?
     
@@ -47,7 +49,7 @@ open class CompositionalLayoutableSection: NSObject {
         }
         
         guard let index else {
-            debugPrint("couldn't reload data because index is nil")
+            debugPrint("couldn't reload data because section index couldn't be recoginzed")
             return
         }
         

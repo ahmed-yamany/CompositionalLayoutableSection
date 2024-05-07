@@ -6,8 +6,8 @@
 //
 
 import UIKit
-@available(iOS 13.0, *)
-open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+
+open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
     
     public weak var provider: (any CompositionalLayoutProvider)?
 
@@ -41,29 +41,5 @@ open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource, 
     
     public func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         dataSource(at: sourceIndexPath)?.collectionView?(collectionView, moveItemAt: sourceIndexPath, to: destinationIndexPath)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        guard let firstIndex = indexPaths[safe: 0] else {
-            return
-        }
-        dataSource(at: firstIndex)?.collectionView(collectionView, prefetchItemsAt: indexPaths)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        guard let firstIndex = indexPaths[safe: 0] else {
-            return
-        }
-        dataSource(at: firstIndex)?.collectionView?(collectionView, cancelPrefetchingForItemsAt: indexPaths)
-    }
-}
-
-extension Collection {
-    /// Safely retrieves an element at the specified index, if it exists.
-    ///
-    /// - Parameter index: The index of the element to retrieve.
-    /// - Returns: The element at the specified index, or `nil` if the index is out of bounds.
-    subscript(safe index: Index) -> Element? {
-        indices.contains(index) ? self[index] : nil
     }
 }
