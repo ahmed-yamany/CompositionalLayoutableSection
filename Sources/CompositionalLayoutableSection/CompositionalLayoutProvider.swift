@@ -49,19 +49,19 @@ extension CompositionalLayoutProvider {
         return compositionalLayoutSections[indexPath.section]
     }
     
-    public func dataSource(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionDataSource)? {
+    public func dataSource(at indexPath: IndexPath) -> (any UICompositionalLayoutableSectionDataSource)? {
         getCompositionalLayoutableSection(at: indexPath)?.dataSource
     }
     
-    public func prefetchDataSource(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionDataSourcePrefetching)? {
+    public func prefetchDataSource(at indexPath: IndexPath) -> (any UICompositionalLayoutableSectionDataSourcePrefetching)? {
         getCompositionalLayoutableSection(at: indexPath)?.prefetchDataSource
     }
     
-    public func delegate(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionDelegate)? {
+    public func delegate(at indexPath: IndexPath) -> (any UICompositionalLayoutableSectionDelegate)? {
         getCompositionalLayoutableSection(at: indexPath)?.delegate
     }
     
-    public func sectionLayout(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionLayout)? {
+    public func sectionLayout(at indexPath: IndexPath) -> (any UICompositionalLayoutableSectionLayout)? {
         getCompositionalLayoutableSection(at: indexPath)?.sectionLayout
     }
     

@@ -15,7 +15,7 @@ open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
         self.provider = provider
     }
     
-    func dataSource(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionDataSource)? {
+    func dataSource(at indexPath: IndexPath) -> (any UICompositionalLayoutableSectionDataSource)? {
         provider?.dataSource(at: indexPath)
     }
     

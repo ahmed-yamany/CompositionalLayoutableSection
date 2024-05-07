@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class CompositionalLayoutableDataSourcePrefetching: NSObject, UICollectionViewDataSourcePrefetching {
+open class CompositionalLayoutDataSourcePrefetching: NSObject, UICollectionViewDataSourcePrefetching {
     public weak var provider: (any CompositionalLayoutProvider)?
     
     public init(provider: any CompositionalLayoutProvider) {

@@ -7,19 +7,19 @@
 
 import UIKit
 
-public protocol CompositionalLayoutableSectionDataSource: UICollectionViewDataSource {
+public protocol UICompositionalLayoutableSectionDataSource: UICollectionViewDataSource {
     associatedtype ItemsType
 
     var items: [ItemsType] { get set }
 }
 
-public protocol CompositionalLayoutableSectionDataSourcePrefetching: UICollectionViewDataSourcePrefetching { }
+public protocol UICompositionalLayoutableSectionDataSourcePrefetching: UICollectionViewDataSourcePrefetching { }
 
-public protocol CompositionalLayoutableSectionLayout: AnyObject {
+public protocol UICompositionalLayoutableSectionLayout: AnyObject {
     func sectionLayout(at index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection
 }
 
-@objc public protocol CompositionalLayoutableSectionDelegate: UICollectionViewDelegate {
+@objc public protocol UICompositionalLayoutableSectionDelegate: UICollectionViewDelegate {
     @objc func registerCell(in collectionView: UICollectionView)
     @objc optional func registerSupplementaryView(in collectionView: UICollectionView)
     @objc optional func registerDecorationView(in layout: UICollectionViewCompositionalLayout)
@@ -36,10 +36,10 @@ public protocol CompositionalLayoutableSectionLayout: AnyObject {
    and switch between them to show different sections in the same collection view,
  */
 open class CompositionalLayoutableSection: NSObject {
-    open weak var dataSource: (any CompositionalLayoutableSectionDataSource)?
-    open weak var prefetchDataSource: (any CompositionalLayoutableSectionDataSourcePrefetching)?
-    open weak var sectionLayout: (any CompositionalLayoutableSectionLayout)?
-    open weak var delegate: (any CompositionalLayoutableSectionDelegate)?
+    open weak var dataSource: (any UICompositionalLayoutableSectionDataSource)?
+    open weak var prefetchDataSource: (any UICompositionalLayoutableSectionDataSourcePrefetching)?
+    open weak var sectionLayout: (any UICompositionalLayoutableSectionLayout)?
+    open weak var delegate: (any UICompositionalLayoutableSectionDelegate)?
     
     public weak var collectionView: UICollectionView?
     public var index: Int?

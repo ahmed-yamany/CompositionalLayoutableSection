@@ -15,11 +15,11 @@ open class CompositionalLayoutDelegate: NSObject, UICollectionViewDelegate {
         self.provider = provider
     }
     
-    private func delegate(at indexPath: IndexPath) -> CompositionalLayoutableSectionDelegate? {
+    private func delegate(at indexPath: IndexPath) -> UICompositionalLayoutableSectionDelegate? {
         provider?.delegate(at: indexPath)
     }
     
-    private func delegates() -> [CompositionalLayoutableSectionDelegate?] {
+    private func delegates() -> [UICompositionalLayoutableSectionDelegate?] {
         provider?.compositionalLayoutSections.map { $0.delegate } ?? []
     }
     
