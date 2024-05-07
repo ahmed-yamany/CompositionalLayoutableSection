@@ -18,11 +18,11 @@ extension CompositionalLayoutProvider {
      property of the `CompositionalLayoutProvider`.
      Calling this method before configuring the sections may lead to unexpected behavior.
      */
-    public func updateCompositionalLayout(for collectionView: UICollectionView) {
+    public func updateCompositionalLayout(for collectionView: UICollectionView, configurations: UICollectionViewCompositionalLayoutConfiguration? = nil) {
         updateSections(with: collectionView)
         registerSupplementaryViews(for: collectionView)
         registerCells(for: collectionView)
-        collectionView.collectionViewLayout = collectionViewCompositionalLayout
+        collectionView.collectionViewLayout = collectionViewCompositionalLayout()
     }
     
     private func updateSections(with collectionView: UICollectionView) {
@@ -61,20 +61,25 @@ extension CompositionalLayoutProvider {
         getCompositionalLayoutableSection(at: indexPath)?.delegate
     }
     
-    public func sectionLayout(at indexPath: IndexPath) -> (any UICompositionalLayoutableSectionLayout)? {
-        getCompositionalLayoutableSection(at: indexPath)?.sectionLayout
+    public func sectionLayout(at sectionIndex: Int) -> (any UICompositionalLayoutableSectionLayout)? {
+        getCompositionalLayoutableSection(at: IndexPath(row: 0, section: sectionIndex))?.sectionLayout
     }
     
-    public var collectionViewCompositionalLayout: UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
-            guard let self = self else { return nil }
-            let indexPath = IndexPath(row: 0, section: sectionIndex)
-            let section = self.sectionLayout(at: indexPath)?.sectionLayout(at: sectionIndex, layoutEnvironment: layoutEnvironment)
-            return section
+    public func collectionViewCompositionalLayout(configurations: UICollectionViewCompositionalLayoutConfiguration? = nil) -> UICollectionViewCompositionalLayout {
+        let layout = UICollectionViewCompositionalLayout(sectionProvider: provider)
+        
+        if let configurations {
+            layout.configuration = configurations
         }
         
         registerDecorationViews(for: layout)
-        
         return layout
+    }
+    
+    private var provider: UICollectionViewCompositionalLayoutSectionProvider {
+        { [weak self] sectionIndex, layoutEnvironment in
+            guard let self = self else { return nil }
+            return sectionLayout(at: sectionIndex)?.sectionLayout(at: sectionIndex, layoutEnvironment: layoutEnvironment)
+        }
     }
 }
