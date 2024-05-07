@@ -22,7 +22,7 @@ extension CompositionalLayoutProvider {
         updateSections(with: collectionView)
         registerSupplementaryViews(for: collectionView)
         registerCells(for: collectionView)
-        collectionView.collectionViewLayout = collectionViewCompositionalLayout()
+        collectionView.collectionViewLayout = collectionViewCompositionalLayout(configurations: configurations)
     }
     
     private func updateSections(with collectionView: UICollectionView) {
