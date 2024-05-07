@@ -19,9 +19,9 @@ extension CompositionalLayoutProvider {
      Calling this method before configuring the sections may lead to unexpected behavior.
      */
     public func updateCompositionalLayout(for collectionView: UICollectionView) {
-        registerCells(for: collectionView)
-        registerSupplementaryViews(for: collectionView)
         updateSections(with: collectionView)
+        registerSupplementaryViews(for: collectionView)
+        registerCells(for: collectionView)
         collectionView.collectionViewLayout = collectionViewCompositionalLayout
     }
     
@@ -53,7 +53,7 @@ extension CompositionalLayoutProvider {
         getCompositionalLayoutableSection(at: indexPath)?.dataSource
     }
     
-    public func prefetchDataSource(at indexPath: IndexPath) -> (any UICollectionViewDataSourcePrefetching)? {
+    public func prefetchDataSource(at indexPath: IndexPath) -> (any CompositionalLayoutableSectionDataSourcePrefetching)? {
         getCompositionalLayoutableSection(at: indexPath)?.prefetchDataSource
     }
     

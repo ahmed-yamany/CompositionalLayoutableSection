@@ -13,6 +13,8 @@ public protocol CompositionalLayoutableSectionDataSource: UICollectionViewDataSo
     var items: [ItemsType] { get set }
 }
 
+public protocol CompositionalLayoutableSectionDataSourcePrefetching: UICollectionViewDataSourcePrefetching { }
+
 public protocol CompositionalLayoutableSectionLayout: AnyObject {
     func sectionLayout(at index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection
 }
@@ -35,7 +37,7 @@ public protocol CompositionalLayoutableSectionLayout: AnyObject {
  */
 open class CompositionalLayoutableSection: NSObject {
     open weak var dataSource: (any CompositionalLayoutableSectionDataSource)?
-    open weak var prefetchDataSource: (any UICollectionViewDataSourcePrefetching)?
+    open weak var prefetchDataSource: (any CompositionalLayoutableSectionDataSourcePrefetching)?
     open weak var sectionLayout: (any CompositionalLayoutableSectionLayout)?
     open weak var delegate: (any CompositionalLayoutableSectionDelegate)?
     
