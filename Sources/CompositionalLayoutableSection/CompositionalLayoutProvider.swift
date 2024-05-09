@@ -46,7 +46,7 @@ extension CompositionalLayoutProvider {
     }
     
     public func getCompositionalLayoutableSection(at indexPath: IndexPath) -> CompositionalLayoutableSection? {
-        return compositionalLayoutSections[indexPath.section]
+        return compositionalLayoutSections[safe: indexPath.section]
     }
     
     public func dataSource(at indexPath: IndexPath) -> (any UICompositionalLayoutableSectionDataSource)? {
@@ -73,6 +73,7 @@ extension CompositionalLayoutProvider {
         }
         
         registerDecorationViews(for: layout)
+        
         return layout
     }
     
