@@ -7,11 +7,16 @@
 
 import UIKit
 
+public protocol CompositionalLayoutDataSourceConfiguration: AnyObject {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
+}
+
 open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
     
     public weak var provider: (any CompositionalLayoutProvider)?
-
-    public init(provider: any CompositionalLayoutProvider) {
+    public weak var configuration: (any CompositionalLayoutDataSourceConfiguration)?
+    
+    public init(provider: any CompositionalLayoutProvider, configuration: (any CompositionalLayoutDataSourceConfiguration)? = nil) {
         self.provider = provider
     }
     
@@ -32,7 +37,11 @@ open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        dataSource(at: indexPath)?.collectionView?(collectionView,viewForSupplementaryElementOfKind: kind,at: indexPath) ?? UICollectionReusableView()
+        if indexPath.item == 9223372036854775807, let configuration = configuration {
+            return configuration.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
+        } else {
+            return dataSource(at: indexPath)?.collectionView?(collectionView,viewForSupplementaryElementOfKind: kind,at: indexPath) ?? UICollectionReusableView()
+        }
     }
     
     public func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
