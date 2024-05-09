@@ -18,6 +18,7 @@ open class CompositionalLayoutDataSource: NSObject, UICollectionViewDataSource {
     
     public init(provider: any CompositionalLayoutProvider, configuration: (any CompositionalLayoutDataSourceConfiguration)? = nil) {
         self.provider = provider
+        self.configuration = configuration
     }
     
     func dataSource(at indexPath: IndexPath) -> (any UICompositionalLayoutableSectionDataSource)? {
